@@ -7,23 +7,23 @@ setTimeout(function(){
 }, 1000 * 60 * 5);
 
 console.log('up');
-var T = new Twit({
+const T = new Twit({
   consumer_key: process.env.consumer_key,
   consumer_secret: process.env.consumer_secret,
   access_token: process.env.access_token,
   access_token_secret: process.env.access_token_secret
 });
-//"25073877";
-var trump_id = "25073877"
+//"939091";
+const joe_id = "939091"
 
-var stream = T.stream('statuses/filter',  { follow: trump_id})
+const stream = T.stream('statuses/filter',  { follow: joe_id})
 
 stream.on('tweet', function (tweet) {
   //CHECK based on object
 
 
-  if(tweet.user.id_str !== trump_id) {
-    console.log('not trump');
+  if(tweet.user.id_str !== joe_id) {
+    console.log('not joe');
     return ;
   }
   if(tweet.in_reply_to_status_id) {
@@ -32,41 +32,25 @@ stream.on('tweet', function (tweet) {
 
   }
   if(tweet.retweeted_status) {
-    return;
-
+	console.log("retweet")	  
+    	return;
   }
   var text = (tweet.truncated) ? tweet.extended_tweet.full_text : tweet.text;
   console.log(text);
   var t_exploded = text.split(" ");
-  //MANUAL RETWEET
+  //MANUAL RETWEETS
   if(t_exploded[0] === "RT") {
     return;
   }
   if(t_exploded[0].indexOf('"@') > -1) {
     return;
   }
-  var exclaimed = false;
-  var tweetString = "";
-  t_exploded.forEach(function(e,i){
-
-    if(e.indexOf("!") > -1 && e.indexOf('http') < 0) {
-      exclaimed = true;
-    }
-    tweetString += e.replace(/!/g, '?')+" ";
-  });
-  tweetString = tweetString.replace(/&amp;/g,"&");
-  if(!exclaimed) {
+  let newTweet = "Listen Jack! "+text; 
+  if (newTweet.length > 280) {
     return;
   }
-  if(tweet.is_quote_status) {
-    var url = tweet.quoted_status_permalink.url;
-    if(tweetString.indexOf(url) === -1) {
-      tweetString += " "+url;
-    }
-  }
-  console.log(tweetString);
   
-  T.post('statuses/update', { status: tweetString }, function(err, data, response) {
+  T.post('statuses/update', { status: newTweet }, function(err, data, response) {
     console.log(data)
   });
   

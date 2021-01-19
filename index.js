@@ -18,7 +18,7 @@ const joe_id = "939091"
 
 const stream = T.stream('statuses/filter',  { follow: joe_id})
 
-T.post('statuses/update', { status: "test" }, function(err, data, response) {
+T.post('statuses/update', { status: "test 2" }, function(err, data, response) {
     console.log(data)
   });
 

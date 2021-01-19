@@ -21,7 +21,7 @@ const stream = T.stream('statuses/filter',  { follow: joe_id})
 
 stream.on('tweet', function (tweet) {
   //CHECK based on object
-
+	console.log("dddd");
 
   if(tweet.user.id_str !== joe_id) {
     console.log('not joe');

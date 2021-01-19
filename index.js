@@ -40,7 +40,7 @@ stream.on('tweet', function (tweet) {
   if(t_exploded[0].indexOf('"@') > -1) {
     return;
   }
-  let newTweet = "Listen Jack! "+text; 
+  let newTweet = "Listen, Jack! "+text; 
   if (newTweet.length > 280) {
     return;
   }

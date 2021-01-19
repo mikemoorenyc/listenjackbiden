@@ -15,14 +15,9 @@ const T = new Twit({
 });
 //"939091";
 const joe_id = "939091"
-
 const stream = T.stream('statuses/filter',  { follow: joe_id})
-
-
 stream.on('tweet', function (tweet) {
   //CHECK based on object
-	console.log("dddd");
-
   if(tweet.user.id_str !== joe_id) {
     console.log('not joe');
     return ;
@@ -30,7 +25,6 @@ stream.on('tweet', function (tweet) {
   if(tweet.in_reply_to_status_id) {
     console.log('blocked reply');
     return;
-
   }
   if(tweet.retweeted_status) {
 	console.log("retweet")	  
@@ -58,6 +52,4 @@ stream.on('tweet', function (tweet) {
   if(process.env.test_string) {
 	  https.get(process.env.test_string + encodeURIComponent(tweetString));
   }
-
-
 });

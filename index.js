@@ -24,8 +24,7 @@ stream.on('tweet', function (tweet) {
     console.log('not joe');
     return ;
   }
-  console.log(tweet);
-  return; 
+  
   
   if(tweet.in_reply_to_status_id) {
     console.log('blocked reply');

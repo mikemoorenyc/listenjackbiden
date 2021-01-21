@@ -15,13 +15,18 @@ const T = new Twit({
 });
 //"939091";
 const joe_id = "939091"
+const potus_id = "1349149096909668363"
 const stream = T.stream('statuses/filter',  { follow: joe_id})
 stream.on('tweet', function (tweet) {
   //CHECK based on object
-  if(tweet.user.id_str !== joe_id) {
+  let user_id = tweet.user.id_str
+  if(user_id !== joe_id && user_id !== potus_id) {
     console.log('not joe');
     return ;
   }
+  console.log(tweet);
+  return; 
+  
   if(tweet.in_reply_to_status_id) {
     console.log('blocked reply');
     return;

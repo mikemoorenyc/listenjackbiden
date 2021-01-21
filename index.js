@@ -16,7 +16,7 @@ const T = new Twit({
 //"939091";
 const joe_id = "939091"
 const potus_id = "1349149096909668363"
-const stream = T.stream('statuses/filter',  { follow: joe_id})
+const stream = T.stream('statuses/filter',  { follow: joe_id+","+potus_id})
 stream.on('tweet', function (tweet) {
   //CHECK based on object
   let user_id = tweet.user.id_str

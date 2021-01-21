@@ -22,7 +22,7 @@ stream.on('tweet', function (tweet) {
   let user_id = tweet.user.id_str
   if(user_id !== joe_id && user_id !== potus_id) {
     console.log('not joe');
-	  console.log(tweet);
+	  console.log(tweet.text);
     return ;
   }
   
